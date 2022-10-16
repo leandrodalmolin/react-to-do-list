@@ -1,0 +1,37 @@
+.root {
+  border-radius: 50%;
+  border: 2px solid var(--blue);
+  width: 18px;
+  height: 18px;
+  margin: 4px 2px;
+  background-color: transparent;
+  transition: border-color 150ms, background-color 150ms;
+  cursor: pointer;
+}
+
+.root:hover {
+  border-color: var(--blue-dark);
+}
+
+
+.root[data-state="checked"] {
+  border-color: var(--purple-dark);
+  background-color: var(--purple-dark);
+}
+
+.root[data-state="checked"]:hover {
+  border-color: var(--purple);
+  background-color: var(--purple);
+}
+
+.root:focus {
+  outline: 1px solid var(--gray-500);
+  box-shadow: 0 0 0 2px var(--purple-dark);
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-100);
+}
