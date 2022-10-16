@@ -1,0 +1,5 @@
+.tasks {
+  max-width: calc(736px + (2 * 2.5rem));
+  margin: auto;
+  padding: 0 2.5rem;
+}

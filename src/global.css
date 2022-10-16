@@ -16,6 +16,11 @@
   --danger: #e25858;
 }
 
+:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 1px var(--purple-dark);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -23,11 +28,17 @@
 }
 
 body {
+  background: var(--gray-600);
+  color: var(--gray-300);
+  -webkit-font-smoothing: antialised;
+ }
+
+body,
+input,
+textarea,
+button {
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 1rem;
-  color: var(--gray-300);
   line-height: 1.4;
-  background: var(--gray-600);
-  -webkit-font-smoothing: antialised;
- }
+}
