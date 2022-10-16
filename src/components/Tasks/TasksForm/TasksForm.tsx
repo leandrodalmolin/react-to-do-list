@@ -12,6 +12,9 @@ export function TasksForm({ onCreateTask }: TasksFormProps) {
 
   function handleSubmitForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (taskText === '') {
+      return;
+    }
     onCreateTask(taskText);
     setTaskText('');
   }
