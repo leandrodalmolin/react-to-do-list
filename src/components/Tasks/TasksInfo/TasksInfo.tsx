@@ -1,18 +1,18 @@
 import { Badge } from "../../UI/Badge/Badge";
 
-import styles from "./TasksListHeader.module.css";
+import styles from "./TasksInfo.module.css";
 
-interface TasksListHeaderProps {
+interface TasksInfoProps {
   totalTasks: number;
   totalCompletedTasks: number;
 }
 
-export function TasksListHeader({
+export function TasksInfo({
   totalTasks,
   totalCompletedTasks,
-}: TasksListHeaderProps) {
+}: TasksInfoProps) {
   return (
-    <div className={styles.header}>
+    <div className={styles.container}>
       <div>
         Total tasks <Badge>{totalTasks}</Badge>
       </div>

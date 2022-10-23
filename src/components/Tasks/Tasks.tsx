@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TasksForm } from "./TasksForm/TasksForm";
+import { TasksInfo } from "./TasksInfo/TasksInfo";
 import { TasksList } from "./TasksList/TasksList";
 
 import styles from "./Tasks.module.css";
@@ -13,6 +14,14 @@ export interface Task {
 
 export function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [completedTasks, setCompletedTasks] = useState(0);
+
+  useEffect(() => {
+    const numberOfCompletedTasks = tasks.reduce((count, task) => {
+      return task.isCompleted ? count + 1 : count;
+    }, 0);
+    setCompletedTasks(numberOfCompletedTasks);
+  }, [tasks]);
 
   function handleCreateTask(taskText: string) {
     const newTask = {
@@ -39,6 +48,7 @@ export function Tasks() {
   return (
     <div className={styles.tasks}>
       <TasksForm onCreateTask={handleCreateTask} />
+      <TasksInfo totalTasks={tasks.length} totalCompletedTasks={completedTasks} />
       <TasksList
         tasks={tasks}
         onDeleteTask={handleDeleteTask}

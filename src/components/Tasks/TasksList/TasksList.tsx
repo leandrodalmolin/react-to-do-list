@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
 import { Trash } from 'phosphor-react';
-import { TasksListHeader } from './TasksListHeader';
 import { Task as TaskInterface } from '../Tasks';
 
 import styles from './TasksList.module.css';
@@ -13,15 +11,6 @@ interface TasksListProps {
 };
 
 export function TasksList({ tasks, onDeleteTask, onCompleteTask }: TasksListProps) {
-  const [completedTasks, setCompletedTasks] = useState(0);
-
-  useEffect(() => {
-    const numberOfCompletedTasks = tasks.reduce((count, task) => {
-      return task.isCompleted ? count + 1 : count;
-    }, 0);
-    setCompletedTasks(numberOfCompletedTasks);
-  }, [tasks]);
-
   function handleDeleteButtonClick(taskId: string) {
     onDeleteTask(taskId);
   }
@@ -32,7 +21,6 @@ export function TasksList({ tasks, onDeleteTask, onCompleteTask }: TasksListProp
 
   return (
     <>
-      <TasksListHeader totalTasks={tasks.length} totalCompletedTasks={completedTasks} />
       <ul className={styles.list}>
         {tasks.map(task => (
           <li key={task.id}>

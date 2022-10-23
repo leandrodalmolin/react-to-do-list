@@ -1,4 +1,4 @@
-.header {
+.container {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
@@ -9,7 +9,7 @@
   color: var(--blue);
 }
 
-.header > div {
+.container > div {
   display: flex;
   align-items: center;
   gap: 0.5rem;
