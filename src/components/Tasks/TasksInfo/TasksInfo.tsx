@@ -7,10 +7,12 @@ interface TasksInfoProps {
   totalCompletedTasks: number;
 }
 
-export function TasksInfo({
-  totalTasks,
-  totalCompletedTasks,
-}: TasksInfoProps) {
+export function TasksInfo({ totalTasks, totalCompletedTasks }: TasksInfoProps) {
+  const badgeText = totalTasks > 0
+    ? `${totalCompletedTasks} of ${totalTasks}`
+    : `${totalTasks}`
+  ;
+
   return (
     <div className={styles.container}>
       <div>
@@ -18,9 +20,7 @@ export function TasksInfo({
       </div>
       <div className={styles.completed}>
         Completed{" "}
-        <Badge>
-          {totalCompletedTasks} of {totalTasks}
-        </Badge>
+        <Badge>{badgeText}</Badge>
       </div>
     </div>
   );

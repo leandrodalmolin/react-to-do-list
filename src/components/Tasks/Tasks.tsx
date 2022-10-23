@@ -5,6 +5,7 @@ import { TasksInfo } from "./TasksInfo/TasksInfo";
 import { TasksList } from "./TasksList/TasksList";
 
 import styles from "./Tasks.module.css";
+import { TasksListEmpty } from "./TasksListEmpty/TasksListEmpty";
 
 export interface Task {
   id: string;
@@ -15,6 +16,8 @@ export interface Task {
 export function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [completedTasks, setCompletedTasks] = useState(0);
+
+  const hasTasks = tasks.length > 0;
 
   useEffect(() => {
     const numberOfCompletedTasks = tasks.reduce((count, task) => {
@@ -49,11 +52,12 @@ export function Tasks() {
     <div className={styles.tasks}>
       <TasksForm onCreateTask={handleCreateTask} />
       <TasksInfo totalTasks={tasks.length} totalCompletedTasks={completedTasks} />
-      <TasksList
+      {!hasTasks && <TasksListEmpty />}
+      {hasTasks && <TasksList
         tasks={tasks}
         onDeleteTask={handleDeleteTask}
         onCompleteTask={handleCompleteTask}
-      />
+      />}
     </div>
   );
 }
