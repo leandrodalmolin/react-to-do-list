@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TasksForm } from "./TasksForm/TasksForm";
 import { TasksInfo } from "./TasksInfo/TasksInfo";
@@ -15,16 +15,26 @@ export interface Task {
 
 export function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [completedTasks, setCompletedTasks] = useState(0);
 
   const hasTasks = tasks.length > 0;
 
-  useEffect(() => {
-    const numberOfCompletedTasks = tasks.reduce((count, task) => {
-      return task.isCompleted ? count + 1 : count;
-    }, 0);
-    setCompletedTasks(numberOfCompletedTasks);
-  }, [tasks]);
+  // NOTE:
+  // The useEffect() was removed because it is unnecessary.
+  // "tasks" state is always re-rendering the component every time
+  // it gets updated. Therefore, it is possible to count the completed
+  // tasks without any extra state or useEffect().
+  //
+  // const [completedTasks, setCompletedTasks] = useState(0);
+  // useEffect(() => {
+  //   const numberOfCompletedTasks = tasks.reduce((count, task) => {
+  //     return task.isCompleted ? count + 1 : count;
+  //   }, 0);
+  //   setCompletedTasks(numberOfCompletedTasks);
+  // }, [tasks]);
+
+  const numberOfCompletedTasks = tasks.reduce((count, task) => {
+    return task.isCompleted ? count + 1 : count;
+  }, 0);
 
   function handleCreateTask(taskText: string) {
     const newTask = {
@@ -51,7 +61,7 @@ export function Tasks() {
   return (
     <div className={styles.tasks}>
       <TasksForm onCreateTask={handleCreateTask} />
-      <TasksInfo totalTasks={tasks.length} totalCompletedTasks={completedTasks} />
+      <TasksInfo totalTasks={tasks.length} totalCompletedTasks={numberOfCompletedTasks} />
       {!hasTasks && <TasksListEmpty />}
       {hasTasks && <TasksList
         tasks={tasks}
